@@ -44,8 +44,8 @@ class FakeDb{
   //cleanDB with promes
   cleanDb_promes(){
     return new Promise( (resolve,reject) => {
-      Rental.remove({});
-      resolve();
+      Rental.remove({}, () => resolve());
+
     });
   }
 

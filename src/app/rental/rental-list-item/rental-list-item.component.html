@@ -1,8 +1,8 @@
-<a routerLink="/rentals/{{currentRental.id}}" class="card-link">
+<a routerLink="/rentals/{{currentRental._id}}" class="card-link">
 <div class="card bwm-card">
 <img class="card-img-top" src="{{currentRental.image}}" alt="">
 	<div class="card-block">
-		<h6 class="card-subtitle">Whole {{currentRental.category}} &#183; {{currentRental.city}}</h6>
+		<h6 class="card-subtitle">{{currentRental.shared ? "Share" : "Whole"}}  {{currentRental.category}} &#183; {{currentRental.city | ucwords}}</h6>
 		<h4 class="card-title">{{currentRental.title}}</h4>
 		<p class="card-text">{{currentRental.dailyRate}} per Night &#183; Free Cancelation</p>
 	</div>

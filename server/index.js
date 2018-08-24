@@ -13,7 +13,7 @@ const rentalsRoutes = require('./routes/rentals');
 
 mongoose.connect(config.DB_url).then( () =>{
   const fakeDb = new FakeDb();
-  fakeDb.seeDb();
+  fakeDb.seeDbPromes();
 }, (err)=>{
   console.log(err);
 });
