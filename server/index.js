@@ -2,6 +2,8 @@
 const config = require('./config/dev');
 //SERVER EXPRESS
 const express = require('express');
+//Body parser
+const bodyParse = require('body-parser');
 //MONGOOS DATABASE
 const mongoose = require('mongoose');
 //Mongoos Model rentalSchema
@@ -10,10 +12,11 @@ const Rental = require('./models/rental');
 const FakeDb = require('./fake-db');
 //rentals routes
 const rentalsRoutes = require('./routes/rentals');
+const usersRoutes = require('./routes/users');
 
 mongoose.connect(config.DB_url).then( () =>{
   const fakeDb = new FakeDb();
-  fakeDb.seeDbPromes();
+  fakeDb.seeDb();
 }, (err)=>{
   console.log(err);
 });
@@ -21,9 +24,11 @@ mongoose.connect(config.DB_url).then( () =>{
 const app = express();
 
 const PORT = process.env.PORT || 3001;
-
+//Body parser
+app.use(bodyParse.json());
 //ROUTES
 app.use('/api/v1/rentals', rentalsRoutes);
+app.use('/api/v1/users', usersRoutes);
 
 app.listen(3001,()=>{
   console.log("Server ON ...");
