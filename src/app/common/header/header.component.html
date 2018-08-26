@@ -15,8 +15,8 @@
       </div>
   </ng-container>
   <div *ngIf="auth.isAuthenticated()" class="navbar-nav ml-auto">
-    <a class="nav-item nav-link">{{auth.getUsername()}}</a>
-    <a class="nav-item nav-link"  (click)="logout()">logOut</a>
+    <a class="nav-item nav-link clickable">{{auth.getUsername()}}</a>
+    <a class="nav-item nav-link clickable"  (click)="logout()">logOut</a>
   </div>
   </div>
 </nav>

@@ -14,7 +14,7 @@ export class AuthService {
   private decodedToken;
 
   constructor(private http : HttpClient) {
-  this.decodedToken = localStorage.getItem('bwm_meta') || new DecodedToken();
+    this.decodedToken = JSON.parse(localStorage.getItem('bwm_meta')) || new DecodedToken(); 
 }
 
   private saveToke(token): string{
@@ -22,6 +22,10 @@ export class AuthService {
     localStorage.setItem('bwm_auth', token);
     localStorage.setItem('bwm_meta', JSON.stringify(this.decodedToken));
     return token;
+  }
+
+  public getAuthToken(): string{
+    return localStorage.getItem('bwm_auth');
   }
 
   public register(datauser: any): Observable<any>{
