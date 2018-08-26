@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">BookWithMe</a>
+ <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" routerLink="/rentals">BookWithMe</a>
   <form class="form-inline">
     <input class="form-control mr-sm-2 bwm-search" type="search" placeholder="Search" aria-label="Search">
     <button class="btn btn-outline-success my-2 my-sm-0 btn-bwm-search" type="submit">Search</button>
@@ -8,9 +8,15 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav ml-auto">
-      <a class="nav-item nav-link active" href="/temp">login <span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link" href="#">Register</a>
-    </div>
+    <ng-container *ngIf="!auth.isAuthenticated()">
+      <div class="navbar-nav ml-auto">
+        <a class="nav-item nav-link" routerLink="/login">login <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" routerLink="/register">Register</a>
+      </div>
+  </ng-container>
+  <div *ngIf="auth.isAuthenticated()" class="navbar-nav ml-auto">
+    <a class="nav-item nav-link">{{auth.getUsername()}}</a>
+    <a class="nav-item nav-link"  (click)="logout()">logOut</a>
+  </div>
   </div>
 </nav>
