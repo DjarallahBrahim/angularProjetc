@@ -13,10 +13,11 @@ const FakeDb = require('./fake-db');
 //rentals routes
 const rentalsRoutes = require('./routes/rentals');
 const usersRoutes = require('./routes/users');
+const bookinfRoutes = require('./routes/bookings');
 
-mongoose.connect(config.DB_url).then( () =>{
+mongoose.connect(config.DB_url,{ useNewUrlParser: true }).then( () =>{
   const fakeDb = new FakeDb();
-  fakeDb.seeDb();
+  //fakeDb.seeDb();
 }, (err)=>{
   console.log(err);
 });
@@ -29,6 +30,8 @@ app.use(bodyParse.json());
 //ROUTES
 app.use('/api/v1/rentals', rentalsRoutes);
 app.use('/api/v1/users', usersRoutes);
+app.use('/api/v1/bookings', bookinfRoutes);
+
 
 app.listen(3001,()=>{
   console.log("Server ON ...");

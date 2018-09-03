@@ -19,11 +19,9 @@ export class RegisterComponent implements OnInit {
   }
 
 register(){
-  console.log(this.formData);
   this.auth.register(this.formData).subscribe(
     () => {
       this.router.navigate(['/login/',{register: 'success'}]);
-      console.log('GOOOD POST AUTH');
     },
     (errRespens) =>{
       this.errors  = errRespens.error.errors;

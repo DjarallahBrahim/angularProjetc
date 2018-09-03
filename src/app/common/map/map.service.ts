@@ -31,9 +31,7 @@ export class MapService{
     return new Observable( (observable) => {
         this.geoCoder.geocode({address: location}, (result, status) => {
           if(status === 'OK'){
-            console.log("OK");
             const geometry = result[0].geometry.location;
-            console.log(result);
             const coordXY = {lat: geometry.lat(), lng: geometry.lng()} ;
             this.cachLocation(location, coordXY);
             observable.next({lat: geometry.lat(), lng: geometry.lng()});

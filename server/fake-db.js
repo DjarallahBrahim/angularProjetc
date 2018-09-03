@@ -39,10 +39,15 @@ class FakeDb{
                   dailyRate: 23
 }];
     this.user = [{
-      userName: "Test User",
-      email: "test@gmail.com",
-      password: "testest"
-    }];
+          userName: "Test User",
+          email: "test@gmail.com",
+          password: "testest"
+        },
+        {
+            userName: "Test User1",
+            email: "test1@gmail.com",
+            password: "testest1"
+        }];
   }
 
   async cleanDB(){
@@ -60,6 +65,7 @@ class FakeDb{
 
   pushDataRToDb(){
     const user = new User(this.user[0]);
+    const user1 = new User(this.user[1]);
 
     this.rentals.forEach((rental)=>{
       const newRental = new Rental(rental);
@@ -70,12 +76,15 @@ class FakeDb{
       newRental.save();
     });
     user.save();
+    user1.save();
   }
 
   async seeDb(){
     await this.cleanDB();
     this.pushDataRToDb();
   }
+
+
   seeDbPromes(){
     this.cleanDb_promes().then( () => {
       this.pushRantelsToDb();

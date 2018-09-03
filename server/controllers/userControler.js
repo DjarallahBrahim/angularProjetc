@@ -65,6 +65,7 @@ exports.register = (req, res)=>{
   });
 }
 
+//check autorization of user
 exports.authMiddleware = function(req, res, next){
   const token = req.headers.authorization;
 
@@ -77,7 +78,7 @@ exports.authMiddleware = function(req, res, next){
         return res.status(422).send({errors : normalizeErrors(err)});
       }
       if(!user){
-        return res.status(422).send({errors : [{title: "Not autorize", detail: "You need to login"}]});
+        return res.status(422).send({errors : [{title: "Not autorize !", detail: "You need to login"}]});
       }else{
         res.locals.user = user;
         next();
