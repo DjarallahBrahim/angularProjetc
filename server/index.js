@@ -1,9 +1,11 @@
 //import config
-const config = require('./config/dev');
+const config = require('./config');
 //SERVER EXPRESS
 const express = require('express');
 //Body parser
 const bodyParse = require('body-parser');
+//Path of SERVER
+const path = require('path');
 //MONGOOS DATABASE
 const mongoose = require('mongoose');
 //Mongoos Model rentalSchema
@@ -16,10 +18,10 @@ const usersRoutes = require('./routes/users');
 const bookinfRoutes = require('./routes/bookings');
 
 mongoose.connect(config.DB_url,{ useNewUrlParser: true }).then( () =>{
-  const fakeDb = new FakeDb();
-  fakeDb.seeDb();
-}, (err)=>{
-  console.log(err);
+  if(process.env.NODE_ENV !== 'production'){
+    const fakeDb = new FakeDb();
+    fakeDb.seeDb();
+  }
 });
 
 const app = express();
@@ -32,7 +34,16 @@ app.use('/api/v1/rentals', rentalsRoutes);
 app.use('/api/v1/users', usersRoutes);
 app.use('/api/v1/bookings', bookinfRoutes);
 
+if(process.env.NODE_ENV === 'production'){
+  const appPath = path.join(__dirname, '..', 'dist');
+    app.use(express.static(appPath));
 
-app.listen(3001,()=>{
+    app.get('*', function(req, res) {
+      res.sendFile(path.resolve(appPath, 'index.html'));
+  });
+}
+
+
+app.listen(PORT,()=>{
   console.log("Server ON ...");
 })

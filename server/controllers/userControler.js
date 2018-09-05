@@ -1,4 +1,4 @@
-const config = require('../config/dev');
+const config = require('../config');
 const User = require('../models/user');
 const { normalizeErrors } = require('../helper/mongoosHelper');
 const jwt = require('jsonwebtoken');
