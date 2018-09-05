@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Rental } from '../../shared/rental.modele';
 import { RentalService } from '../../shared/rental.service';
+import { Router } from '@angular/router';
+
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
@@ -14,7 +16,8 @@ export class RentalCreateComponent implements OnInit {
   rentalCategorie = Rental.CATEGORIES;
   errors: any[] = [];
 
-  constructor(private rentalService: RentalService) { }
+  constructor(private rentalService: RentalService,
+              private router: Router) { }
 
   ngOnInit() {
     this.newRental = new Rental();
@@ -24,9 +27,9 @@ export class RentalCreateComponent implements OnInit {
 
   creatRental(){
     this.rentalService.creatRental(this.newRental).subscribe(
-      () => {
-
-      },
+      (rental: Rental) => {
+          this.router.navigate([`/rentals/${rental._id}`]);
+        },
       (errRespons: HttpErrorResponse) => {
         this.errors = errRespons.error.errors;
       });
