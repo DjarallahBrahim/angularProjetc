@@ -9,13 +9,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss']
 })
 
-export class HeaderComponent{
+export class HeaderComponent {
 
-  constructor(public auth : AuthService,
-              private router: Router){}
+  constructor(public auth: AuthService,
+              private router: Router) {}
 
-  logout(){
+  logout() {
     this.auth.logout();
     this.router.navigate(['/login']);
+  }
+
+  search(city: string) {
+    city ? this.router.navigate([`/rentals/${city}/home`]) :this.router.navigate(['/rentals']) ;
   }
 }

@@ -17,7 +17,7 @@ const bookinfRoutes = require('./routes/bookings');
 
 mongoose.connect(config.DB_url,{ useNewUrlParser: true }).then( () =>{
   const fakeDb = new FakeDb();
-  //fakeDb.seeDb();
+  fakeDb.seeDb();
 }, (err)=>{
   console.log(err);
 });
